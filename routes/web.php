@@ -24,4 +24,11 @@ Route::get('/nodetypes/create', 'NodeTypeController@create')->name('nodetypes.cr
 Route::post('/nodetypes', 'NodeTypeController@store')->name('nodetypes.store');
 Route::get('/nodetypes/{id}/edit', 'NodeTypeController@edit')->name('nodetypes.edit');
 
-Route::get('/node/{id}', 'NodeController@index')->name('node.index');
+Route::middleware(['auth'])->group(function () {
+  Route::get('/nodes', 'NodeController@index')->name('nodes.index');
+  Route::get('/nodes/create', 'NodeController@create')->name('nodes.create');
+  Route::post('/nodes', 'NodeController@store')->name('nodes.store');
+  Route::get('/nodes/{id}/edit', 'NodeController@edit')->name('nodes.edit');
+});
+Route::get('/nodes/{id}', 'NodeController@show')->name('nodes.show');
+Route::get('/c/{slug}', 'NodeController@slug')->name('nodes.slug');

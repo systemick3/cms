@@ -5,19 +5,19 @@
   <div class="row justify-content-center">
     <div class="col-md-8">
       <div class="card card-default">
-        <div class="card-header">Node Types</div>
+        <div class="card-header">Nodes</div>
         <div class="card-body">
           @if (session('status'))
             <div class="alert alert-success">
               {{ session('status') }}
             </div>
           @endif
-          <div><a href="{{ route('nodetypes.create') }}">Add new node type.</a></span></div>
-          @if (empty($types))
-            <div>No node types currently exist.</div>
+          <div><a href="{{ route('nodes.create') }}">Add new node.</a></span></div>
+          @if (empty($nodes))
+            <div>No nodes currently exist.</div>
           @else
-            @foreach ($types as $type)
-              <div><span>{{ $type->display_name }}</span><span><a href="{{ route('nodetypes.edit', $type->id) }}">Edit.</a></span></div>
+            @foreach ($nodes as $node)
+              <div><span>{{ $node->title }}</span><span><a href="{{ route('nodes.edit', $node->id) }}">Edit.</a></span></div>
             @endforeach
           @endif
         </div>

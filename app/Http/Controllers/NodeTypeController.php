@@ -49,9 +49,9 @@ class NodeTypeController extends Controller
   }
 
   /**
-   * Show the node type edit form.
+   * Store the node type edit form submission.
    *
-   * @param $id integer
+   * @param $request Illuminate\Http\Request
    *
    */
   public function store(Request $request)

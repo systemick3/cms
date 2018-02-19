@@ -51,6 +51,12 @@
                                     <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
                                         @csrf
                                     </form>
+                                    <a class="dropdown-item" href="{{ route('nodetypes.index') }}">
+                                      Node types
+                                    </a>
+                                    <a class="dropdown-item" href="{{ route('nodes.index') }}">
+                                      Nodes
+                                    </a>
                                 </div>
                             </li>
                         @endguest
