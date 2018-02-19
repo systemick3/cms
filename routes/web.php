@@ -18,3 +18,10 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+
+Route::get('/nodetypes', 'NodeTypeController@index')->name('nodetypes.index');
+Route::get('/nodetypes/create', 'NodeTypeController@create')->name('nodetypes.create');
+Route::post('/nodetypes', 'NodeTypeController@store')->name('nodetypes.store');
+Route::get('/nodetypes/{id}/edit', 'NodeTypeController@edit')->name('nodetypes.edit');
+
+Route::get('/node/{id}', 'NodeController@index')->name('node.index');
