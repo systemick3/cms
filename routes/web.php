@@ -29,6 +29,7 @@ Route::middleware(['auth'])->group(function () {
   Route::get('/nodes/create', 'NodeController@create')->name('nodes.create');
   Route::post('/nodes', 'NodeController@store')->name('nodes.store');
   Route::get('/nodes/{id}/edit', 'NodeController@edit')->name('nodes.edit');
+  Route::get('/nodes/ckimage', 'NodeController@ckimage')->name('nodes.ckimage');
 });
 Route::get('/nodes/{id}', 'NodeController@show')->name('nodes.show');
 Route::get('/c/{slug}', 'NodeController@slug')->name('nodes.slug');

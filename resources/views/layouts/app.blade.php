@@ -71,6 +71,8 @@
     </div>
 
     <!-- Scripts -->
-    <script src="{{ asset('js/app.js') }}"></script>
+    @section('footerscripts')
+      <script src="{{ asset('js/app.js') }}"></script>
+    @show
 </body>
 </html>

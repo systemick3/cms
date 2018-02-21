@@ -27,8 +27,8 @@
               @endif
             </div>
             <div class="form-group{{ $errors->has('body') ? ' has-error' : '' }}">
-              <label for="body">Body:</label>
-              <textarea rows="4" cols="50" name="body" id="body">
+              <label for="node-body">Body:</label>
+              <textarea rows="10" cols="80" name="body" id="node-body">
                 {{ isset($node) ? $node->body : '' }}
               </textarea>
               @if ($errors->has('body'))
@@ -42,9 +42,12 @@
               <select name="node_type_id" id="node-type-id">
                 <option value="">-- Select a type --</option>
                 @foreach ($types as $type)
-                  <option value="{{ $type->id }}">{{ $type->display_name }}</option>
+                  <option value="{{ $type->id }}" {{ $node->node_type_id === $type->id ? 'selected' : '' }}>{{ $type->display_name }}</option>
                 @endforeach
               </select>
+            </div>
+            <div class="form-group">
+              URL: {{ $node->slug }}
             </div>
             <div class="form-group">
               <input type="submit" value="Save"/>
@@ -55,4 +58,21 @@
     </div>
   </div>
 </div>
+@endsection
+
+@section('footerscripts')
+  @parent
+  @foreach ($scripts as $script)
+    <script src="{{ asset($script) }}"></script>
+  @endforeach
+  <script>
+    // Replace the <textarea id="editor1"> with a CKEditor
+    // instance, using default configuration.
+    CKEDITOR.replace(
+      'node-body',
+      {
+        removeButtons: 'Source',
+      }
+    );
+  </script>
 @endsection

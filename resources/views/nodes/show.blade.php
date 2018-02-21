@@ -7,7 +7,7 @@
       <div class="card card-default">
         <div class="card-header">{{ $node->title }}</div>
         <div class="card-body">
-          {{ $node->body }}
+          {!! $node->body !!}
         </div>
       </div>
     </div>

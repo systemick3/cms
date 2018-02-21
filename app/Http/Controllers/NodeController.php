@@ -25,6 +25,7 @@ class NodeController extends Controller
   {
     return view('nodes.form')
       ->with('types', NodeType::orderBy('display_name')->get())
+      ->with('scripts', ['vendor/unisharp/laravel-ckeditor/ckeditor.js'])
       ->with('action', 'Add');
   }
 
@@ -38,6 +39,7 @@ class NodeController extends Controller
   {
     return view('nodes.form')
       ->with('types', NodeType::orderBy('display_name')->get())
+      ->with('scripts', ['vendor/unisharp/laravel-ckeditor/ckeditor.js'])
       ->with('action', 'Edit')
       ->with('node', Node::findOrFail($id));
   }
@@ -93,5 +95,33 @@ class NodeController extends Controller
 
     return view('nodes.show')
       ->with('node', $node);
+  }
+
+  /**
+   * Store an image uploaded in ckeditor.
+   *
+   * @param $request Illuminate\Http\Request
+   *
+   */
+  public function ckimage(Request $request) {
+    // $path = $request->file('upload')->store('nodes');
+    // return $path;
+
+    $CKEditor = $request->get('CKEditor');
+    $funcNum = $request->get('CKEditorFuncNum');
+    $message = $url = '';
+    if ($request->hasFile('upload')) {
+        $file = $request->file('upload');
+        if ($file->isValid()) {
+            $filename = $file->getClientOriginalName();
+            $file->move(storage_path().'/nodes/', $filename);
+            $url = public_path() .'/nodes/' . $filename;
+        } else {
+            $message = 'An error occured while uploading the file.';
+        }
+    } else {
+        $message = 'No file uploaded.';
+    }
+    return '<script>window.parent.CKEDITOR.tools.callFunction('.$funcNum.', "'.$url.'", "'.$message.'")</script>';
   }
 }
