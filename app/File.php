@@ -18,4 +18,21 @@ class File extends Model
   {
     return $this->belongsTo(User::class);
   }
+
+  /**
+   * Create a file from an uploaded file.
+   *
+   * @param  \Illuminate\Http\UploadedFile $uploadedFile
+   * @return void
+  */
+  public function handleUploadedFile($uploaded_file)
+  {
+    $this->user_id = auth()->id();
+    $this->filename = $uploaded_file->hashName();
+    // Path is set in controller
+    $this->filemime = $uploaded_file->getClientOriginalExtension();
+    $this->filesize = $uploaded_file->getSize();
+    $this->status = 1;
+    $this->save();
+  }
 }

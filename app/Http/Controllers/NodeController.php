@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Node;
 use App\NodeType;
+use App\File;
 
 class NodeController extends Controller
 {
@@ -62,10 +63,22 @@ class NodeController extends Controller
       $node = new Node($request->only(['title', 'body', 'node_type_id']));
     }
 
+    $uploaded_file = $request->file('image');
+    if (!empty($uploaded_file)) {
+      $path = $uploaded_file->store('public/' . Node::NODE_IMAGES_DIR);
+      $saved_file = new File;
+      $saved_file->filepath = Node::NODE_IMAGES_DIR . '/' . $uploaded_file->hashName();
+      $saved_file->handleUploadedFile($uploaded_file);
+      $node->file_id = $saved_file->id;
+    }
+    else {
+      $node->file_id = NULL;
+    }
+
     $node->slug = str_slug($node->title);
     $node->save();
     $request->session()->flash('status', 'Saved node.');
-    return redirect()->route('nodes.index');
+    return redirect()->route('nodes.list');
   }
 
   /**

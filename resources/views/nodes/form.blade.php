@@ -12,7 +12,7 @@
               {{ session('status') }}
             </div>
           @endif
-          <form class="form" method="POST" action="{{ route('nodes.store') }}">
+          <form class="form" method="POST" action="{{ route('nodes.store') }}" enctype="multipart/form-data">
             {{ csrf_field() }}
             <div class="form-group{{ $errors->has('title') ? ' has-error' : '' }}">
               @if (isset($node))
@@ -25,6 +25,25 @@
                   <strong>{{ $errors->first('title') }}</strong>
                 </span>
               @endif
+            </div>
+            <div class="form-group{{ $errors->has('image') ? ' has-error' : '' }}">
+              <label for="image">Banner image:</label>
+              @if (!is_null($node->file_id))
+                <div v-bind:class="{ 'd-none': imageAdded }">
+                  <img width="200" height="100" src="{{ asset('storage/' . $node->file->filepath) }}" />
+
+                </div>
+                <div v-bind:class="{ 'd-none': imageAdded }"><a @click="imageAdded = !imageAdded;" class="change-image" href="#">Change image.</a></div>
+                <div v-bind:class="{ 'd-none': !imageAdded }"><a @click="imageAdded = !imageAdded;" class="change-image" href="#">Show image.</a></div>
+              @endif
+              <div v-bind:class="{ 'd-none': !imageAdded }">
+                <input type="file" name="image" id="image" />
+              </div>
+               @if ($errors->has('image'))
+                 <span class="help-block">
+                   <strong>{{ $errors->first('image') }}</strong>
+                 </span>
+               @endif
             </div>
             <div class="form-group{{ $errors->has('body') ? ' has-error' : '' }}">
               <label for="node-body">Body:</label>
@@ -42,13 +61,15 @@
               <select name="node_type_id" id="node-type-id">
                 <option value="">-- Select a type --</option>
                 @foreach ($types as $type)
-                  <option value="{{ $type->id }}" {{ $node->node_type_id === $type->id ? 'selected' : '' }}>{{ $type->display_name }}</option>
+                  <option value="{{ $type->id }}" {{ isset($node) && $node->node_type_id === $type->id ? 'selected' : '' }}>{{ $type->display_name }}</option>
                 @endforeach
               </select>
             </div>
-            <div class="form-group">
-              URL: {{ $node->slug }}
-            </div>
+            @if (isset($node))
+              <div class="form-group">
+                URL: {{ $node->slug }}
+              </div>
+            @endif
             <div class="form-group">
               <input type="submit" value="Save"/>
             </div>

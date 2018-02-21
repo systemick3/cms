@@ -25,9 +25,11 @@ Route::post('/nodetypes', 'NodeTypeController@store')->name('nodetypes.store');
 Route::get('/nodetypes/{id}/edit', 'NodeTypeController@edit')->name('nodetypes.edit');
 
 Route::middleware(['auth'])->group(function () {
-  Route::get('/nodes', 'NodeController@index')->name('nodes.index');
+  //Route::get('/nodes', 'NodeController@index')->name('nodes.index');
+  Route::get('/nodes/list', 'NodeController@index')->name('nodes.list');
   Route::get('/nodes/create', 'NodeController@create')->name('nodes.create');
-  Route::post('/nodes', 'NodeController@store')->name('nodes.store');
+  //Route::post('/nodes', 'NodeController@store')->name('nodes.store');
+  Route::post('/nodes/list', 'NodeController@store')->name('nodes.store');
   Route::get('/nodes/{id}/edit', 'NodeController@edit')->name('nodes.edit');
   Route::get('/nodes/ckimage', 'NodeController@ckimage')->name('nodes.ckimage');
 });

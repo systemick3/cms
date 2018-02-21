@@ -17,7 +17,11 @@
             <div>No nodes currently exist.</div>
           @else
             @foreach ($nodes as $node)
-              <div><span>{{ $node->title }}</span><span><a href="{{ route('nodes.edit', $node->id) }}">Edit.</a></span></div>
+              <div>
+                <span>{{ $node->title }}</span>
+                <span><a href="{{ route('nodes.edit', $node->id) }}">Edit.</a></span>
+                <span><a href="{{ route('nodes.slug', $node->slug) }}">View.</a></span>
+              </div>
             @endforeach
           @endif
         </div>

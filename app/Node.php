@@ -8,6 +8,8 @@ use App\File;
 
 class Node extends Model
 {
+  const NODE_IMAGES_DIR = 'nodes/images';
+
   /**
    * The attributes that are mass assignable.
    *
