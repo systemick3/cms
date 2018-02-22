@@ -161,4 +161,35 @@ class NodeController extends Controller
     $request->session()->flash('status', 'Node status changed.');
     return redirect()->route('nodes.list');
   }
+
+  /**
+   * Request confirmation of delete.
+   *
+   * @param $id integer
+   *
+   * @return view()
+   *
+   */
+  public function delete($id)
+  {
+    return view('nodes.delete')
+      ->with('node', Node::findOrFail($id));
+  }
+
+  /**
+   * Delete a node.
+   *
+   * @param $id integer
+   * @param $request Illuminate\Http\Request
+   *
+   * @return view()
+   *
+   */
+  public function deleteConfirmed($id, Request $request)
+  {
+    $node = Node::findOrFail($id);
+    $node->delete();
+    $request->session()->flash('status', 'Node deleted.');
+    return redirect()->route('nodes.list');
+  }
 }

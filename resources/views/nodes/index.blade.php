@@ -22,6 +22,7 @@
                 <span><a href="{{ route('nodes.edit', $node->id) }}">Edit.</a></span>
                 <span><a href="{{ route('nodes.slug', $node->slug) }}">View.</a></span>
                 <span><a href="{{ route('nodes.status', $node->id) }}">{{ $node->status ? 'Disable' : 'Enable' }}</a></span>
+                <span><a href="{{ route('nodes.delete', $node->id) }}">Delete</a></span>
               </div>
             @endforeach
           @endif

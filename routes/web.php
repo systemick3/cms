@@ -37,6 +37,8 @@ Route::middleware(['auth'])->prefix('nodes')->group(function () {
   Route::get('/{id}/edit', 'NodeController@edit')->name('nodes.edit');
   //Route::get('/ckimage', 'NodeController@ckimage')->name('nodes.ckimage');
   Route::get('/{id}/status', 'NodeController@status')->name('nodes.status');
+  Route::get('/{id}/delete', 'NodeController@delete')->name('nodes.delete');
+  Route::get('/{id}/delete/confirmed', 'NodeController@deleteConfirmed')->name('nodes.delete_confirmed');
 });
 Route::get('/nodes/{id}', 'NodeController@show')->name('nodes.show');
 Route::get('/c/{slug}', 'NodeController@slug')->name('nodes.slug');
@@ -48,4 +50,6 @@ Route::middleware(['auth'])->prefix('blocks')->group(function () {
   Route::post('/', 'BlockController@store')->name('blocks.store');
   Route::get('/{id}/edit', 'BlockController@edit')->name('blocks.edit');
   Route::get('/{id}/status', 'BlockController@status')->name('blocks.status');
+  Route::get('/{id}/delete', 'BlockController@delete')->name('blocks.delete');
+  Route::get('/{id}/delete/confirmed', 'BlockController@deleteConfirmed')->name('blocks.delete_confirmed');
 });

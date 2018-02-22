@@ -75,6 +75,7 @@ class BlockController extends Controller
    * Set the block status.
    *
    * @param $id integer
+   * @param $request Illuminate\Http\Request
    *
    * @return redirect()
    *
@@ -85,6 +86,37 @@ class BlockController extends Controller
     $block->status = !$block->status;
     $block->save();
     $request->session()->flash('status', 'Block status changed.');
+    return redirect()->route('blocks.index');
+  }
+
+  /**
+   * Request confirmation of delete.
+   *
+   * @param $id integer
+   *
+   * @return view()
+   *
+   */
+  public function delete($id)
+  {
+    return view('blocks.delete')
+      ->with('block', Block::findOrFail($id));
+  }
+
+  /**
+   * Delete a block.
+   *
+   * @param $id integer
+   * @param $request Illuminate\Http\Request
+   *
+   * @return view()
+   *
+   */
+  public function deleteConfirmed($id, Request $request)
+  {
+    $block = Block::findOrFail($id);
+    $block->delete();
+    $request->session()->flash('status', 'Block deleted.');
     return redirect()->route('blocks.index');
   }
 }
