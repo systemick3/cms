@@ -21,6 +21,7 @@
                 <span>{{ $block->display_name }}</span>
                 @if (!$block->in_code)
                   <span><a href="{{ route('blocks.edit', $block->id) }}">Edit.</a></span>
+                  <span><a href="{{ route('blocks.status', $block->id) }}">{{ $block->status ? 'Disable' : 'Enable' }}</a></span>
                 @endif
               </div>
             @endforeach

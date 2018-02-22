@@ -89,8 +89,14 @@ class NodeController extends Controller
    */
   public function show($id)
   {
+    $node = Node::findOrFail($id);
+
+    if (!$node->status) {
+      abort(404);
+    }
+
     return view('nodes.show')
-      ->with('node', Node::findOrFail($id));
+      ->with('node', $node);
   }
 
   /**
@@ -124,17 +130,35 @@ class NodeController extends Controller
     $funcNum = $request->get('CKEditorFuncNum');
     $message = $url = '';
     if ($request->hasFile('upload')) {
-        $file = $request->file('upload');
-        if ($file->isValid()) {
-            $filename = $file->getClientOriginalName();
-            $file->move(storage_path().'/nodes/', $filename);
-            $url = public_path() .'/nodes/' . $filename;
-        } else {
-            $message = 'An error occured while uploading the file.';
-        }
+      $file = $request->file('upload');
+      if ($file->isValid()) {
+        $filename = $file->getClientOriginalName();
+        $file->move(storage_path().'/nodes/', $filename);
+        $url = public_path() .'/nodes/' . $filename;
+      } else {
+        $message = 'An error occured while uploading the file.';
+      }
     } else {
         $message = 'No file uploaded.';
     }
+
     return '<script>window.parent.CKEDITOR.tools.callFunction('.$funcNum.', "'.$url.'", "'.$message.'")</script>';
+  }
+
+  /**
+   * Set the node status.
+   *
+   * @param $id integer
+   *
+   * @return redirect()
+   *
+   */
+  public function status($id, Request $request)
+  {
+    $node = Node::findOrFail($id);
+    $node->status = !$node->status;
+    $node->save();
+    $request->session()->flash('status', 'Node status changed.');
+    return redirect()->route('nodes.list');
   }
 }

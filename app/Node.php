@@ -20,6 +20,15 @@ class Node extends Model
   ];
 
   /**
+   * The attributes that are mass assignable.
+   *
+   * @var array
+   */
+  protected $casts = [
+    'status' => 'boolean'
+  ];
+
+  /**
    * Define a many-to-one relationship.
    *
    * @return \Illuminate\Database\Eloquent\Relations\BelongsTo.

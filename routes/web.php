@@ -19,11 +19,15 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 
-Route::get('/nodetypes', 'NodeTypeController@index')->name('nodetypes.index');
-Route::get('/nodetypes/create', 'NodeTypeController@create')->name('nodetypes.create');
-Route::post('/nodetypes', 'NodeTypeController@store')->name('nodetypes.store');
-Route::get('/nodetypes/{id}/edit', 'NodeTypeController@edit')->name('nodetypes.edit');
+// Nodetypes
+Route::middleware(['auth'])->prefix('nodetypes')->group(function () {
+  Route::get('/', 'NodeTypeController@index')->name('nodetypes.index');
+  Route::get('/create', 'NodeTypeController@create')->name('nodetypes.create');
+  Route::post('/', 'NodeTypeController@store')->name('nodetypes.store');
+  Route::get('/{id}/edit', 'NodeTypeController@edit')->name('nodetypes.edit');
+});
 
+// Nodes
 Route::middleware(['auth'])->prefix('nodes')->group(function () {
   //Route::get('/nodes', 'NodeController@index')->name('nodes.index');
   Route::get('/list', 'NodeController@index')->name('nodes.list');
@@ -32,13 +36,16 @@ Route::middleware(['auth'])->prefix('nodes')->group(function () {
   Route::post('/list', 'NodeController@store')->name('nodes.store');
   Route::get('/{id}/edit', 'NodeController@edit')->name('nodes.edit');
   //Route::get('/ckimage', 'NodeController@ckimage')->name('nodes.ckimage');
+  Route::get('/{id}/status', 'NodeController@status')->name('nodes.status');
 });
 Route::get('/nodes/{id}', 'NodeController@show')->name('nodes.show');
 Route::get('/c/{slug}', 'NodeController@slug')->name('nodes.slug');
 
+// Blocks
 Route::middleware(['auth'])->prefix('blocks')->group(function () {
   Route::get('/', 'BlockController@index')->name('blocks.index');
   Route::get('/create', 'BlockController@create')->name('blocks.create');
   Route::post('/', 'BlockController@store')->name('blocks.store');
   Route::get('/{id}/edit', 'BlockController@edit')->name('blocks.edit');
+  Route::get('/{id}/status', 'BlockController@status')->name('blocks.status');
 });

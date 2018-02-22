@@ -6,7 +6,15 @@ Sort route problem on /nodes.
 
 Get Laravel image upload class working.
 
-Implement disabled and delete functionality on nodes & blocks.
+Implement delete functionality on nodes & blocks.
+
+Basic menu functionality.
+
+Basic layout functionality.
+
+User permissions functionality.
+
+Ajax messages.
 
 ## FRONT END
 
@@ -15,3 +23,9 @@ Implement disabled and delete functionality on nodes & blocks.
 Component to handle form image.
 
 ####################################################################################################
+
+// Basic node functionality.
+
+// Basic block functionality.
+
+// Implement disabled functionality on nodes & blocks.

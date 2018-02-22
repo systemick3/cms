@@ -63,11 +63,28 @@ class BlockController extends Controller
     }
     else {
       $block = new Block($request->only(['display_name', 'title', 'body']));
+      $block->machine_name = strtolower(str_replace(['-', ' '], '_', $request->get('display_name')));
     }
 
-    $block->machine_name = strtolower(str_replace(['-', ' '], '_', $request->get('display_name')));
     $block->save();
     $request->session()->flash('status', 'Saved block.');
+    return redirect()->route('blocks.index');
+  }
+
+  /**
+   * Set the block status.
+   *
+   * @param $id integer
+   *
+   * @return redirect()
+   *
+   */
+  public function status($id, Request $request)
+  {
+    $block = Block::findOrFail($id);
+    $block->status = !$block->status;
+    $block->save();
+    $request->session()->flash('status', 'Block status changed.');
     return redirect()->route('blocks.index');
   }
 }
