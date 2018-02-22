@@ -56,12 +56,22 @@ class BlockController extends Controller
   public function store(Request $request)
   {
     if ($request->has('id')) {
+      $this->validate($request, [
+        'display_name' => 'required|string|max:255',
+        'title' => 'required|string|max:255'
+      ]);
+
       $block = Block::findOrFail($request->get('id'));
       $block->display_name = $request->get('display_name');
       $block->title = $request->get('title');
       $block->body = $request->get('body');
     }
     else {
+      $this->validate($request, [
+        'display_name' => 'required|string|max:255|unique:blocks',
+        'title' => 'required|string|max:255|unique:blocks'
+      ]);
+
       $block = new Block($request->only(['display_name', 'title', 'body']));
       $block->machine_name = strtolower(str_replace(['-', ' '], '_', $request->get('display_name')));
     }

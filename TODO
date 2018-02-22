@@ -1,7 +1,5 @@
 ## BACK END
 
-Validate node & from submissions.
-
 Sort route problem on /nodes.
 
 Get Laravel image upload class working.
@@ -29,3 +27,5 @@ Component to handle form image.
 // Implement disabled functionality on nodes & blocks.
 
 // Implement delete functionality on nodes & blocks.
+
+// Validate node & block form submissions.

@@ -56,7 +56,7 @@
                 </span>
               @endif
             </div>
-            <div class="form-group{{ $errors->has('body') ? ' has-error' : '' }}">
+            <div class="form-group{{ $errors->has('node_type_id') ? ' has-error' : '' }}">
               <label for="node-type-id">Type:</label>
               <select name="node_type_id" id="node-type-id">
                 <option value="">-- Select a type --</option>
@@ -64,6 +64,11 @@
                   <option value="{{ $type->id }}" {{ isset($node) && $node->node_type_id === $type->id ? 'selected' : '' }}>{{ $type->display_name }}</option>
                 @endforeach
               </select>
+              @if ($errors->has('node_type_id'))
+                <span class="help-block">
+                  <strong>{{ $errors->first('node_type_id') }}</strong>
+                </span>
+              @endif
             </div>
             @if (isset($node))
               <div class="form-group">

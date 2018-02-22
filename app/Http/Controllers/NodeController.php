@@ -54,6 +54,24 @@ class NodeController extends Controller
   public function store(Request $request)
   {
     if ($request->has('id')) {
+      $title_constraints = 'required|string|max:255';
+    }
+    else {
+      $title_constraints = 'required|string|max:255|unique:blocks';
+    }
+    $constraints = [
+      'title' => $title_constraints,
+      'node_type_id' => 'required'
+    ];
+
+    $uploaded_file = $request->file('image');
+    if (!empty($uploaded_file)) {
+      $constraints['file_id'] = 'image';
+    }
+
+    $this->validate($request, $constraints);
+
+    if ($request->has('id')) {
       $node = Node::findOrFail($request->get('id'));
       $node->title = $request->get('title');
       $node->body = $request->get('body');
@@ -63,7 +81,6 @@ class NodeController extends Controller
       $node = new Node($request->only(['title', 'body', 'node_type_id']));
     }
 
-    $uploaded_file = $request->file('image');
     if (!empty($uploaded_file)) {
       $path = $uploaded_file->store('public/' . Node::NODE_IMAGES_DIR);
       $saved_file = new File;
