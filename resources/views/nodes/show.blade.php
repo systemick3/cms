@@ -12,7 +12,7 @@
               <img class="img-fluid" src="{{ asset('storage/' . $node->file->filepath) }}" />
             </div>
           @endif
-          <div>
+          <div class="node-body" id="node-body">
             {!! $node->body !!}
           </div>
         </div>

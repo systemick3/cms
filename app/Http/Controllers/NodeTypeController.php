@@ -61,7 +61,7 @@ class NodeTypeController extends Controller
     }
     else {
       $type = new NodeType;
-      $type->machine_name = str_replace(['-', ' '], '_', $request->get('display_name'));
+      $type->machine_name = strtolower(str_replace(['-', ' '], '_', $request->get('display_name')));
     }
 
     $type->display_name = $request->get('display_name');

@@ -28,7 +28,7 @@
             </div>
             <div class="form-group{{ $errors->has('image') ? ' has-error' : '' }}">
               <label for="image">Banner image:</label>
-              @if (!is_null($node->file_id))
+              @if (isset($node) && !is_null($node->file_id))
                 <div v-bind:class="{ 'd-none': imageAdded }">
                   <img width="200" height="100" src="{{ asset('storage/' . $node->file->filepath) }}" />
 

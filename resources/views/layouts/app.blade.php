@@ -57,6 +57,9 @@
                   <a class="dropdown-item" href="{{ route('nodes.list') }}">
                     Nodes
                   </a>
+                  <a class="dropdown-item" href="{{ route('blocks.index') }}">
+                    Blocks
+                  </a>
                 </div>
               </li>
             @endguest

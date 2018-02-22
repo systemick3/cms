@@ -1,0 +1,17 @@
+## BACK END
+
+Validate node & from submissions.
+
+Sort route problem on /nodes.
+
+Get Laravel image upload class working.
+
+Implement disabled and delete functionality on nodes & blocks.
+
+## FRONT END
+
+## JS
+
+Component to handle form image.
+
+####################################################################################################
