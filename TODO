@@ -2,8 +2,6 @@
 
 Sort route problem on /nodes.
 
-Get Laravel image upload class working.
-
 Basic menu functionality.
 
 Basic layout functionality.
@@ -29,3 +27,5 @@ Ajax messages.
 // Validate node & block form submissions.
 
 // Component to handle form image.
+
+// Get Laravel filemanager upload class working.
