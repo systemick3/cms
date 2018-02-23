@@ -17,9 +17,20 @@ window.Vue = require('vue');
 
 Vue.component('example-component', require('./components/ExampleComponent.vue'));
 
+Vue.component('image-input', require('./components/ImageInput.vue'));
+
 const app = new Vue({
     el: '#app',
-    data: {
-      imageAdded: false
-    }
+});
+
+// var images = document.getElementById("node-body").getElementsByTagName("img");
+// for (var i=0; i<images.length; i++) {
+//   images[i].classList.add('mike-testing');
+//   console.log(images[i].classList);
+// }
+// console.log(images);
+// x.classList.add('mike-testing');
+
+$(document).ready(function() {
+  // all custom jQuery will go here
 });

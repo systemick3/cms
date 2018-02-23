@@ -16,8 +16,6 @@ Ajax messages.
 
 ## JS
 
-Component to handle form image.
-
 ####################################################################################################
 
 // Basic node functionality.
@@ -29,3 +27,5 @@ Component to handle form image.
 // Implement delete functionality on nodes & blocks.
 
 // Validate node & block form submissions.
+
+// Component to handle form image.

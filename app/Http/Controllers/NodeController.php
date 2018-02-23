@@ -89,7 +89,12 @@ class NodeController extends Controller
       $node->file_id = $saved_file->id;
     }
     else {
-      $node->file_id = NULL;
+      if ($request->has('file_id')) {
+        $node->file_id = $request->get('file_id');
+      }
+      else {
+        $node->file_id = NULL;
+      }
     }
 
     $node->slug = str_slug($node->title);

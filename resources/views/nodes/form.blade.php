@@ -27,23 +27,17 @@
               @endif
             </div>
             <div class="form-group{{ $errors->has('image') ? ' has-error' : '' }}">
-              <label for="image">Banner image:</label>
-              @if (isset($node) && !is_null($node->file_id))
-                <div v-bind:class="{ 'd-none': imageAdded }">
-                  <img width="200" height="100" src="{{ asset('storage/' . $node->file->filepath) }}" />
-
-                </div>
-                <div v-bind:class="{ 'd-none': imageAdded }"><a @click="imageAdded = !imageAdded;" class="change-image" href="#">Change image.</a></div>
-                <div v-bind:class="{ 'd-none': !imageAdded }"><a @click="imageAdded = !imageAdded;" class="change-image" href="#">Show image.</a></div>
+              <image-input
+                :initial-image="'{{ !empty($node) && !is_null($node->file_id) }}'"
+                :file-id="'{{ !empty($node) && !is_null($node->file_id) ? $node->file_id : '' }}'"
+                :image-url="'{{ !empty($node) && !is_null($node->file_id) ? asset('storage/' . $node->file->filepath) : '' }}'"
+                >
+              </image-edit>
+              @if ($errors->has('image'))
+                <span class="help-block">
+                  <strong>{{ $errors->first('image') }}</strong>
+                </span>
               @endif
-              <div v-bind:class="{ 'd-none': !imageAdded }">
-                <input type="file" name="image" id="image" />
-              </div>
-               @if ($errors->has('image'))
-                 <span class="help-block">
-                   <strong>{{ $errors->first('image') }}</strong>
-                 </span>
-               @endif
             </div>
             <div class="form-group{{ $errors->has('body') ? ' has-error' : '' }}">
               <label for="node-body">Body:</label>
